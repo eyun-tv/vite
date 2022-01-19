@@ -1,4 +1,5 @@
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import coffee from "rollup-plugin-coffee2";
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -6,6 +7,12 @@ export default defineConfig({
     target: process.env.NODE_ENV === 'production' ? 'chrome60' : 'esnext'
   },
   worker: {
-    plugins: [vueJsx()]
-  }
+    format: 'es',
+    plugins: [
+      coffee({
+        bare: true,
+        sourceMap: true,
+      }),
+    ]
+  },
 })
